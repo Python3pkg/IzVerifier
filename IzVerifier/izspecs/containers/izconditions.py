@@ -46,7 +46,7 @@ class IzConditions(IzContainer):
         Returns the ids for all variables referenced by variable type conditions.
         """
         variables = set()
-        for cond in self.container.itervalues():
+        for cond in self.container.values():
             if self.has_def_by_variable_ref(cond):
                 if cond.find('name'):
                     var = cond.find('name').get_text()
@@ -56,11 +56,11 @@ class IzConditions(IzContainer):
         return variables
 
     def print_keys(self):
-        for cond in self.container.keys():
+        for cond in list(self.container.keys()):
             print(cond)
 
     def count(self):
-        return len(self.container.keys())
+        return len(list(self.container.keys()))
 
     def get_spec_elements(self):
         """

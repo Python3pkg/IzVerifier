@@ -50,7 +50,7 @@ class IzVariables(IzContainer):
         """
         Return number of vars found in definition file.
         """
-        return len(self.container.keys())
+        return len(list(self.container.keys()))
 
     def get_spec_elements(self):
         """

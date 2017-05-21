@@ -45,10 +45,10 @@ class TestDependencies(unittest.TestCase):
         self.assertFalse(not_found)
 
         for cond in extras_found:
-            print "%s should not have been found" % cond
+            print("%s should not have been found" % cond)
 
         for cond in not_found:
-            print "%s was not found" % cond
+            print("%s was not found" % cond)
 
 
 

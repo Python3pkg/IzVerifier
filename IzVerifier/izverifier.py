@@ -1,14 +1,14 @@
-from Queue import Queue
+from queue import Queue
 import importlib
-from IzVerifier.izspecs.containers.izclasses import IzClasses
+from .IzVerifier.izspecs.containers.izclasses import IzClasses
 
-from IzVerifier.izspecs.izproperties import IzProperties
-from IzVerifier.izspecs.verifiers.dependencies import ConditionDependencyGraph
-from IzVerifier.izspecs.verifiers.seeker import Seeker
-from IzVerifier.izspecs.containers.constants import *
-from IzVerifier.exceptions.IzVerifierException import IzArgumentsException
-from IzVerifier.izspecs.izpaths import IzPaths
-from IzVerifier.logging.reporter import Reporter
+from .IzVerifier.izspecs.izproperties import IzProperties
+from .IzVerifier.izspecs.verifiers.dependencies import ConditionDependencyGraph
+from .IzVerifier.izspecs.verifiers.seeker import Seeker
+from .IzVerifier.izspecs.containers.constants import *
+from .IzVerifier.exceptions.IzVerifierException import IzArgumentsException
+from .IzVerifier.izspecs.izpaths import IzPaths
+from .IzVerifier.logging.reporter import Reporter
 
 
 __author__ = 'fcanas'
@@ -131,7 +131,7 @@ class IzVerifier():
         container = self.get_container(specification)
 
         args = {
-            'specs': map(self.paths.get_path, container.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.paths.get_path, container.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': container.has_reference,
             'attributes': container.properties[ATTRIBUTES],
             'transform_fn': container.ref_transformer,
@@ -164,7 +164,7 @@ class IzVerifier():
         props = {
             'path': self.paths.root,
             'id': rid,
-            'specs': map(self.paths.get_path, container.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.paths.get_path, container.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': container.has_reference,
             'attributes': container.properties[ATTRIBUTES],
             'transformer': lambda x: x,
@@ -230,7 +230,7 @@ class IzVerifier():
 
         izclass_container = self.get_container("classes")
         class_to_path_map = izclass_container.container
-        classes_referenced_in_specs, spec_found_in = zip(*self.find_specification_references("classes"))
+        classes_referenced_in_specs, spec_found_in = list(zip(*self.find_specification_references("classes")))
 
         for reffed_class in classes_referenced_in_specs:
             queue = Queue()

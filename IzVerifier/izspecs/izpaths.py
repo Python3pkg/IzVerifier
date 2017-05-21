@@ -69,7 +69,7 @@ class IzPaths():
         installer's install.xml spec.
         """
         self.soup = BeautifulSoup(open(self.get_path('install')))
-        for spec in self.specs.keys():
+        for spec in list(self.specs.keys()):
             spec_file = self.find_specs_path(spec)
             if spec_file:
                 # If spec file exists

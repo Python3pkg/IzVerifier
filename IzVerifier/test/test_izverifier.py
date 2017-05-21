@@ -62,7 +62,7 @@ class TestVerifier(unittest.TestCase):
 
         # Test for number of keys in conditions.xml plus white list
         num = len(izc.get_keys()) - len(izc.properties[WHITE_LIST])
-        print num
+        print(num)
         self.assertEquals(num, 15, str(num) + "!=15")
 
     def test_langpack_paths(self):
@@ -72,7 +72,7 @@ class TestVerifier(unittest.TestCase):
         langpacks = [('default', 'data/sample_installer_iz5/resources/langpacks/CustomLangPack.xml'),
                      ('eng', 'data/sample_installer_iz5/resources/langpacks/CustomLangPack.xml')]
 
-        for tpack, fpack in zip(langpacks, self.izv.paths.get_langpacks().keys()):
+        for tpack, fpack in zip(langpacks, list(self.izv.paths.get_langpacks().keys())):
             self.assertEquals(tpack[1], self.izv.paths.get_langpack_path(tpack[0]))
 
 
@@ -122,7 +122,7 @@ class TestVerifier(unittest.TestCase):
                              'my.izpack5.key.3'}
 
 
-        found_strings, location = zip(*hits)
+        found_strings, location = list(zip(*hits))
 
         strings_not_found = undefined_strings - set(found_strings)
         additional_found_strings = set(found_strings) - undefined_strings
@@ -142,7 +142,7 @@ class TestVerifier(unittest.TestCase):
                                 'some.condition.2',
                                 'some.condition.1'}
 
-        found_conditions, location = zip(*hits)
+        found_conditions, location = list(zip(*hits))
 
         for id in undefined_conditions:
             self.assertTrue(id in found_conditions)
@@ -194,10 +194,10 @@ class TestVerifier(unittest.TestCase):
         self.assertEquals(len(hits), 5)
 
         referenced = self.izv.get_referenced('classes')
-        self.assertTrue(referenced.has_key('com.sample.installer.Foo'))
-        self.assertTrue(referenced.has_key('com.sample.installer.SuperValidator'))
-        self.assertTrue(referenced.has_key('com.sample.installer.SuperDuperValidator'))
-        self.assertTrue(referenced.has_key('com.sample.installer.BarListener'))
+        self.assertTrue('com.sample.installer.Foo' in referenced)
+        self.assertTrue('com.sample.installer.SuperValidator' in referenced)
+        self.assertTrue('com.sample.installer.SuperDuperValidator' in referenced)
+        self.assertTrue('com.sample.installer.BarListener' in referenced)
 
     def test_findReferencedClasses(self):
         """
@@ -220,10 +220,10 @@ class TestVerifier(unittest.TestCase):
         self.assertTrue(len(classes_not_found) == 0)
 
         for reffed_class in extra_classes_found:
-            print "this class shouldn't have been found %s" % reffed_class
+            print("this class shouldn't have been found %s" % reffed_class)
 
         for reffed_class in classes_not_found:
-            print "this class should have been found %s" % reffed_class
+            print("this class should have been found %s" % reffed_class)
 
 
 

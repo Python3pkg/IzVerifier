@@ -24,7 +24,7 @@ class ConditionDependencyGraph():
             crefs = self.verifier.filter_unused_classes(self.verifier.referenced_classes, self.crefs)
             crefs, sources = self.unzip(crefs)
         else:
-            crefs, sources = zip(*self.crefs)
+            crefs, sources = list(zip(*self.crefs))
         return self.drefs | set(srefs) | set(crefs)
 
     def test_verify_all_dependencies(self):
@@ -80,7 +80,7 @@ class ConditionDependencyGraph():
             return True
 
         # Short-circuit ill-defined conditions:
-        if cond_id in self.ill_defined.keys():
+        if cond_id in list(self.ill_defined.keys()):
             current_path = current_path + ((cond_id, 'ill-defined condition'),)
             undefined_paths.add(current_path)
             return False
@@ -103,7 +103,7 @@ class ConditionDependencyGraph():
         condition = self.conditions.container[cond_id]
         condition_type = condition['type']
 
-        if condition_type in self.condition_tests.keys() and not \
+        if condition_type in list(self.condition_tests.keys()) and not \
                 self.condition_tests[condition_type](self, condition, undefined_paths, current_path):
             return False
 
@@ -213,7 +213,7 @@ class ConditionDependencyGraph():
         :return: Two lists if x is not empty, otherwise returns x and an empty list.
         """
         if (len(x)>0):
-            return zip(*x)
+            return list(zip(*x))
         else:
             return x, list()
 

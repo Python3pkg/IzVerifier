@@ -133,7 +133,7 @@ class Seeker:
         """
         hits = set()
         if len(patterns) != 0:
-            searches, extractors = zip(*patterns)
+            searches, extractors = list(zip(*patterns))
             combined_search_pattern = '|'.join(searches)
             combined_extract_pattern = '|'.join(extractors)
 

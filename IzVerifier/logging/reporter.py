@@ -1,6 +1,6 @@
 __author__ = 'fcanas'
 
-import termhelper
+from . import termhelper
 
 
 class Reporter:
@@ -25,7 +25,7 @@ class Reporter:
         """
         template = self.templates['test']
         test_width = self.width - 4  # Test tuple is wrapped in [  ], which is 4 characters
-        print template.format(test, len(items), 0, test_width - len(test), len(test))
+        print(template.format(test, len(items), 0, test_width - len(test), len(test)))
         self.report_set(items)
 
     def report_set(self, entities):
@@ -36,10 +36,10 @@ class Reporter:
             if type(item) is tuple:
                 template = self.templates['set_tuples']
                 tuple_padding = self.get_tuple_padding(item)
-                print template.format(item[0], item[1], tuple_padding, len(item[1]))
+                print(template.format(item[0], item[1], tuple_padding, len(item[1])))
             else:
                 template = self.templates['set_items']
-                print template.format(item, self.width)
+                print(template.format(item, self.width))
 
     def set_terminal_width(self, warg=-1):
         """
@@ -92,7 +92,7 @@ class Reporter:
                 for node_index, node in enumerate(path):
                     if node_index == 0:
                         if path_index == 0:
-                            print template.format(condition_id + node_type(node), self.width - len('[ FAIL ]'))
+                            print(template.format(condition_id + node_type(node), self.width - len('[ FAIL ]')))
                         else:
                             continue
                     else:
@@ -109,6 +109,6 @@ class Reporter:
                         else:
                             branch = ''
 
-                        print " " * tab + branch + str(cid) + node_type(node)
+                        print(" " * tab + branch + str(cid) + node_type(node))
                         tab += add_to_tab
-            print
+            print()

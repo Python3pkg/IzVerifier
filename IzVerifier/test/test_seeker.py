@@ -66,7 +66,7 @@ class TestSeeker(unittest.TestCase):
         props = {
             'path': self.verifier.paths.root,
             'id': 'some.condition.1',
-            'specs': map(self.verifier.paths.get_path, self.conditions.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.verifier.paths.get_path, self.conditions.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': self.conditions.has_reference,
             'attributes': self.conditions.properties[ATTRIBUTES],
             'transformer': lambda x: x,
@@ -86,7 +86,7 @@ class TestSeeker(unittest.TestCase):
         props = {
             'path': self.verifier.paths.root,
             'id': 'some.user.password',
-            'specs': map(self.verifier.paths.get_path, self.variables.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.verifier.paths.get_path, self.variables.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': self.variables.has_reference,
             'attributes': self.variables.properties[ATTRIBUTES],
             'transformer': lambda x: x,
@@ -105,7 +105,7 @@ class TestSeeker(unittest.TestCase):
 
         props = {
             'path': self.verifier.paths.root,
-            'specs': map(self.verifier.paths.get_path, self.strings.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.verifier.paths.get_path, self.strings.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': self.strings.has_reference,
             'attributes': self.strings.properties[ATTRIBUTES],
         }
@@ -120,7 +120,7 @@ class TestSeeker(unittest.TestCase):
 
         props = {
             'path': self.verifier.paths.root,
-            'specs': map(self.verifier.paths.get_path, self.conditions.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.verifier.paths.get_path, self.conditions.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': self.conditions.has_reference,
             'attributes': self.conditions.properties[ATTRIBUTES],
             'white_list_patterns': []
@@ -137,7 +137,7 @@ class TestSeeker(unittest.TestCase):
 
         props = {
             'path': self.verifier.paths.root,
-            'specs': map(self.verifier.paths.get_path, self.variables.properties[REFERENCE_SPEC_FILES]),
+            'specs': list(map(self.verifier.paths.get_path, self.variables.properties[REFERENCE_SPEC_FILES])),
             'filter_fn': self.variables.has_reference,
             'attributes': self.variables.properties[ATTRIBUTES],
             'white_list_patterns': []
@@ -174,10 +174,10 @@ class TestSeeker(unittest.TestCase):
         for hit in hits:
             key = seeker.process_key(hit, ['string.in.whitelist'], 'idata.getString\(.*|System.*.println\(.*')
             if key is None:
-                print str(hit[2]) + " => " + str(key)
+                print(str(hit[2]) + " => " + str(key))
                 self.assertEquals(hit[2], key)
             else:
-                print str(hit[2]) + " => " + str(key[0])
+                print(str(hit[2]) + " => " + str(key[0]))
                 self.assertEquals(hit[2], key[0])
 
 

@@ -63,14 +63,14 @@ class IzClasses(IzContainer):
         """
         Return number of vars found in definition file.
         """
-        return len(self.container.keys())
+        return len(list(self.container.keys()))
 
     def print_keys(self):
         """
         Prints all of the variable keys found in definition spec.
         """
-        for key in self.container.keys():
-            print key
+        for key in list(self.container.keys()):
+            print(key)
 
     def get_spec_elements(self):
         """

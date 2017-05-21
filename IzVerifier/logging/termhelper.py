@@ -16,4 +16,4 @@ def terminal_height_width():
 
 if __name__ == "__main__":
     term_height, term_width = terminal_height_width()
-    print "The terminal has", term_height, "rows and", term_width, "columns"
+    print("The terminal has", term_height, "rows and", term_width, "columns")

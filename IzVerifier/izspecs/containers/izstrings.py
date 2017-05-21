@@ -109,12 +109,12 @@ class IzStrings(IzContainer):
     def get_keys(self):
         """
         """
-        return self.container.keys()
+        return list(self.container.keys())
 
     def count(self):
         """
         """
-        return len(self.container.keys())
+        return len(list(self.container.keys()))
 
     def get_spec_elements(self):
         """
